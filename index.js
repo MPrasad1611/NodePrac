@@ -63,25 +63,20 @@ const menu = {
     fish: 300,
   },
 };
-
 const server = http.createServer((req, res) => {
   const purl = url.parse(req.url, true);
 //   console.log(purl);
-
   if (req.method === "GET") {
     const pathParts = purl.pathname.split("/").filter(Boolean);
-
     if (pathParts.length === 2) {
       const category = pathParts[0]; 
       const dish = pathParts[1]; 
-
       if (menu[category] && menu[category][dish]) {
         const quantity = parseInt(purl.query.quantity) || 1;
         const unitPrice = menu[category][dish];
         const price = quantity * unitPrice;
         const gst = price * 0.05; 
         const totalPrice = price + gst;
-
         const response = {
           category: category,
           item: dish,
@@ -91,7 +86,6 @@ const server = http.createServer((req, res) => {
           total_price: totalPrice.toFixed(2),
           message: "Thank you for your order",
         };
-
         res.writeHead(200,"Dish Found", { "Content-Type": "application/json" });
         res.end(JSON.stringify(response));
       } else {
