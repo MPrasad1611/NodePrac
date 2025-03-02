@@ -31,7 +31,7 @@ const fs = require("fs");
 
 const server = http.createServer((req, res) => {
   if (req.method == "GET") {
-    res.end("GET request received"); // Response for GET requests
+    res.end("GET request received"); 
   } 
   else if (req.method == "POST") {
     let ipData = "";
@@ -40,7 +40,7 @@ const server = http.createServer((req, res) => {
       ipData += chunk;
     });
 
-    req.on("end", () => { // Ensuring data is fully received before writing
+    req.on("end", () => { 
       fs.writeFile("info.txt", ipData, (err) => {
         if (err) {
           console.log(err);
