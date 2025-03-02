@@ -56,23 +56,45 @@ const server = http.createServer((req, res) => {
      });
   } 
   else if (req.method == "POST") {
-    let ipData = "";
+    // let ipData = "";
 
-    req.on("data", (chunk) => {
-      ipData += chunk;
-    });
+    // req.on("data", (chunk) => {
+    //   ipData += chunk;
+    // });
 
-    req.on("end", () => { 
-      fs.writeFile("./info.txt", ipData, (err) => {
-        if (err) {
-          console.log(err);
-          res.end("Error saving data");
-        } else {
-          res.end("Data saved successfully");
-        }
-      });
-    });
-  } 
+    // req.on("end", () => { 
+    //   fs.writeFile("./info.txt", ipData, (err) => {
+    //     if (err) {
+    //       console.log(err);
+    //       res.end("Error saving data");
+    //     } else {
+    //       res.end("Data saved successfully");
+    //     }
+    //   });
+    // });
+
+    fs.readFile("./data.json", (err, data) => {
+      if (err) {
+        res.write(err);
+        res.end();
+      } 
+      else {
+          let newName="Ram"
+          let existingData1=JSON.parse(data)
+          existingData1.push(newName)
+          fs.writeFile("./data.json", JSON.stringify(existingData1), (err) => {
+            if (err) {
+              res.write(err);
+              res.end();
+            } else
+             {
+              res.write("Data saved successfully");
+              res.end();
+             }
+          })
+      }
+    }) 
+} 
   else {
     res.end("Invalid request");
   }
