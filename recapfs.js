@@ -41,7 +41,7 @@ const server = http.createServer((req, res) => {
     });
 
     req.on("end", () => { 
-      fs.writeFile("info.txt", ipData, (err) => {
+      fs.writeFile("./info.txt", ipData, (err) => {
         if (err) {
           console.log(err);
           res.end("Error saving data");
