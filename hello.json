@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "name": "Alice",
+    "age": 25,
+    "occupation": "Engineer",
+    "location": "Tokyo, Japan"
+  },
+  {
+    "id": 2,
+    "name": "Bob",
+    "age": 30,
+    "occupation": "Artist",
+    "location": "Paris, France"
+  },
+  { "id": 3, "name": "sagar", "age": 23 },
+  {
+    "id": 9,
+    "name": "Alice",
+    "age": 25,
+    "occupation": "Engineer",
+    "location": "Tokyo, Japan"
+  }
+]
