@@ -41,6 +41,9 @@ app.post("/hello", async (req, res) => {
     res.status(500).send({ message: "Internal Server Error", err: err });
   }
 });
+app.get("/hello/:id", async (req, res) => {
+    console.log(req.params);
+})
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
