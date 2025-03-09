@@ -42,7 +42,18 @@ app.post("/hello", async (req, res) => {
   }
 });
 app.get("/hello/:id", async (req, res) => {
-    console.log(req.params);
+    try{
+        let id = req.params.id;
+        let data = await fs.readFile("./hello.json", "utf8");
+        let pdata = JSON.parse(data);
+        res
+      .status(201)
+      .json({ status: "200", message: "success", response: pdata[id] });
+
+
+    }catch (err) {
+    res.status(500).send({ message: "Internal Server Error", err: err });
+    }
 })
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
