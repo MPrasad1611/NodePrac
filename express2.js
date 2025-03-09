@@ -27,9 +27,8 @@ app.get("/hello", async (req, res) => {
   }
 });
 app.post("/hello", async (req, res) => {
-    
   try {
-    let newdata = req.body
+    let newdata = req.body;
     let existingdata = await fs.readFile("./hello.json", "utf8");
     let existingdata1 = JSON.parse(existingdata);
     existingdata1.push(newdata);
