@@ -55,7 +55,7 @@ app.get("/hellobyid/:id", async (req, res) => {
 });
 app.get("/hellobyname/:name", async (req, res) => {
   try {
-    let name1 = req.params.name;
+    let name1 = req.params.name.toLowerCase();
     let data = await fs.readFile("./hello.json", "utf8");
     let pdata = JSON.parse(data);
     let op = pdata.filter((x, y) => {
