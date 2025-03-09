@@ -41,20 +41,41 @@ app.post("/hello", async (req, res) => {
     res.status(500).send({ message: "Internal Server Error", err: err });
   }
 });
-app.get("/hello/:id", async (req, res) => {
-    try{
-        let id = req.params.id;
-        let data = await fs.readFile("./hello.json", "utf8");
-        let pdata = JSON.parse(data);
-        res
+app.get("/hellobyid/:id", async (req, res) => {
+  try {
+    let id = req.params.id;
+    let data = await fs.readFile("./hello.json", "utf8");
+    let pdata = JSON.parse(data);
+    res
       .status(201)
       .json({ status: "200", message: "success", response: pdata[id] });
-
-
-    }catch (err) {
+  } catch (err) {
     res.status(500).send({ message: "Internal Server Error", err: err });
+  }
+});
+app.get("/hellobyname/:name", async (req, res) => {
+  try {
+    let name1 = req.params.name;
+    let data = await fs.readFile("./hello.json", "utf8");
+    let pdata = JSON.parse(data);
+    let op = pdata.filter((x, y) => {
+      return x.name == name1;
+    });
+    if (op.length > 0) {
+      res.status(201).json({ status: "200", message: "success", response: op });
+    } else {
+      res
+        .status(404)
+        .json({
+          status: "404",
+          message: "Data not found",
+          response: "No data found",
+        });
     }
-})
+  } catch (err) {
+    res.status(500).send({ message: "Internal Server Error", err: err });
+  }
+});
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
