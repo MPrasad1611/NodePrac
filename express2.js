@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const fs = require("fs").promises;
+app.use(express.json());
 app.get("/hello", async (req, res) => {
   // // res.send('Hello World');
   // fs.readFile("./hello.json","utf8",(err,data) =>{
@@ -26,8 +27,9 @@ app.get("/hello", async (req, res) => {
   }
 });
 app.post("/hello", async (req, res) => {
+    
   try {
-    let newdata = { name: "Rahul", email: "rahul@gmail.com" };
+    let newdata = req.body
     let existingdata = await fs.readFile("./hello.json", "utf8");
     let existingdata1 = JSON.parse(existingdata);
     existingdata1.push(newdata);
