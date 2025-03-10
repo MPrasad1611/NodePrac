@@ -13,6 +13,7 @@ app.get("/menu",async (req, res) => {
     // })
     let data =await fs.readFile("./hello.json", "utf-8");
     console.log(data);
+    res.setHeader("Content-Type", "application/json"); 
     res.send(JSON.parse(data));
 })
 app.listen(3000, () => {
