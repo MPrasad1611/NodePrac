@@ -12,9 +12,10 @@ app.get("/menu",async (req, res) => {
     //     }
     // })
     let data =await fs.readFile("./hello.json", "utf-8");
-    console.log(data);
+    console.log(JSON.parse(data));
     res.setHeader("Content-Type", "application/json"); 
     res.send(JSON.parse(data));
+
 })
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
